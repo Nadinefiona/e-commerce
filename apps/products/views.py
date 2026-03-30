@@ -2,7 +2,6 @@ from django.core.cache import cache
 from rest_framework import permissions, viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
 
-from apps.accounts.models import User
 from apps.accounts.permissions import IsVendor
 from apps.products.models import Category, Product
 from apps.products.serializers import CategorySerializer, ProductSerializer

@@ -48,8 +48,7 @@ Base: `/api/v1/`
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/auth/register/` | Register customer or vendor |
-| POST | `/auth/login/` | Get JWT token pair |
-| POST | `/auth/token/refresh/` | Refresh access token |
+| POST | `/auth/login/` | Get JWT access token |
 
 ### Products
 | Method | Endpoint | Description |
@@ -131,4 +130,4 @@ docker-compose up --build
 - **Django signals** for decoupled notification creation on order events
 - **Cached product listings** to reduce DB load on high-traffic catalog pages
 - **Split settings** for safe local development vs hardened production config
-- **JWT with token rotation and blacklisting** for stateless, secure auth
+- **JWT access token** for simple, stateless auth (single token per login)

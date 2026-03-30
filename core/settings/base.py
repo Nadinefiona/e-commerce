@@ -10,7 +10,6 @@ load_dotenv(BASE_DIR / ".env")
 env = environ.Env(
     DEBUG=(bool, False),
     ACCESS_TOKEN_LIFETIME_MINUTES=(int, 30),
-    REFRESH_TOKEN_LIFETIME_DAYS=(int, 7),
     CACHE_TIMEOUT_SECONDS=(int, 120),
 )
 environ.Env.read_env(BASE_DIR / ".env")
@@ -27,7 +26,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "rest_framework_simplejwt.token_blacklist",
     "django_filters",
     "apps.accounts",
     "apps.products",
@@ -124,9 +122,6 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=env("ACCESS_TOKEN_LIFETIME_MINUTES")),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=env("REFRESH_TOKEN_LIFETIME_DAYS")),
-    "ROTATE_REFRESH_TOKENS": True,
-    "BLACKLIST_AFTER_ROTATION": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 }
