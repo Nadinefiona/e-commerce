@@ -1,3 +1,4 @@
+from django.utils.text import slugify
 from rest_framework import serializers
 
 from apps.products.models import Category, Product
@@ -7,7 +8,11 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ["id", "name", "slug"]
-        read_only_fields = ["id"]
+        read_only_fields = ["id", "slug"]
+
+    def create(self, validated_data):
+        validated_data["slug"] = slugify(validated_data["name"])
+        return super().create(validated_data)
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -21,7 +26,11 @@ class ProductSerializer(serializers.ModelSerializer):
             "name", "slug", "description", "price", "stock",
             "image", "is_active", "created_at", "updated_at",
         ]
-        read_only_fields = ["id", "vendor", "created_at", "updated_at"]
+        read_only_fields = ["id", "vendor", "slug", "created_at", "updated_at"]
+
+    def create(self, validated_data):
+        validated_data["slug"] = slugify(validated_data["name"])
+        return super().create(validated_data)
 
     def validate_price(self, value):
         if value <= 0:

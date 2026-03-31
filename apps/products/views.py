@@ -42,11 +42,12 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         cache_key = f"{PRODUCT_LIST_CACHE_KEY}:{request.get_full_path()}"
-        cached = cache.get(cache_key)
-        if cached is not None:
-            return cached
+        cached_data = cache.get(cache_key)
+        if cached_data is not None:
+            from rest_framework.response import Response
+            return Response(cached_data)
         response = super().list(request, *args, **kwargs)
-        cache.set(cache_key, response, timeout=120)
+        cache.set(cache_key, response.data, timeout=120)
         return response
 
     def perform_update(self, serializer):
