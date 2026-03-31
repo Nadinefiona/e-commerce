@@ -23,22 +23,6 @@ Production-ready Django REST Framework backend for an e-commerce platform.
 - Gunicorn for production serving
 - Docker + Docker Compose
 
-## Project Structure
-
-```
-core/                   # Django project config
-  settings/
-    base.py             # Shared settings
-    local.py            # Development overrides
-    production.py       # Production security
-apps/
-  accounts/             # Custom User, JWT auth, permissions
-  products/             # Product + Category CRUD
-  cart/                 # Shopping cart
-  orders/               # Order checkout + status management
-  payments/             # Simulated payment processing
-  notifications/        # Signal-driven notification log
-```
 
 ## API Endpoints
 
